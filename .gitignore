@@ -1,0 +1,17 @@
+build/
+bin/
+.vs/
+__pycache__/
+*.py[cod]
+.env
+.env.*
+*.pem
+*.key
+*.exe
+*.obj
+*.pdb
+*.sqlite3*
+*.log
+runs/
+output/
+preferences.json

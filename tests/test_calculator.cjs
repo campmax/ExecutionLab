@@ -1,0 +1,13 @@
+const assert=require('node:assert/strict');
+const {estimate}=require('../monitor_tools.js');
+const m={fresh:true,quote:{bid:99,ask:101,mid:100,bid_size:3,ask_size:2,size_unit:'base asset units'}};
+let r=estimate(m,'buy',5,10,0);assert.equal(r.covered,2);assert.equal(r.uncovered,3);assert.equal(r.spreadCost,2);assert.equal(r.fees,.202);assert.equal(r.coveragePct,40);
+r=estimate(m,'sell',2,0,0);assert.equal(r.covered,2);assert.equal(r.cash,198);assert.equal(r.spreadCost,2);
+const stock={...m,quote:{...m.quote,size_unit:'reported round lots'}};
+assert.throws(()=>estimate(stock,'buy',100,0,0));
+assert.equal(estimate(stock,'buy',300,0,100).covered,200);
+assert.throws(()=>estimate(m,'buy',1,0,0,true));
+assert.throws(()=>estimate({...m,fresh:false},'buy',1,0,0));
+assert.throws(()=>estimate(m,'buy',NaN,0,0));
+assert.throws(()=>estimate(m,'buy',1,-1,0));
+console.log('PASS: calculator partial coverage, buy/sell accounting, explicit lot conversion, stale/offline suppression, invalid input rejection');
