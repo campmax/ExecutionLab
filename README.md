@@ -1,5 +1,9 @@
 # ExecutionLab
 
+Python event-driven execution research with latency, spread, liquidity and queue models, plus read-only market monitoring.
+
+# ExecutionLab
+
 **An event-driven execution backtester with a current-data anomaly monitor.**
 
 **Start with `START_HERE.cmd`** for a guided menu and saved watchlists/settings.
