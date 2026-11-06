@@ -34,7 +34,7 @@ def digest(path):
 
 
 def scenario(name="calm", seed=17, n=601):
-    """Engineered fixtures; no fitted parameters or claimed historical realism."""
+    pass                                                                          
     if name not in ("calm", "rising", "falling", "liquidity_shock"):
         raise ValueError("Unknown scenario")
     rng = random.Random(seed)

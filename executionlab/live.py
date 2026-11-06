@@ -1,4 +1,4 @@
-"""Read-only Coinbase L1 polling and causal robust monitoring (stdlib only)."""
+pass                                                                           
 from collections import deque
 from dataclasses import dataclass, asdict
 from datetime import datetime, timezone
@@ -171,7 +171,7 @@ class Detector:
                 self.emitted[k] = now
         self.history.append(s)
         self.status = "monitoring" if len(self.history) > self.warmup else "warming_up"
-        # Sustained price shift becomes a new regime, never an everlasting bargain.
+                                                                                   
         if max(self.streak.get("price_high", 0), self.streak.get("price_low", 0)) >= 10:
             self.history = deque(list(self.history)[-10:], maxlen=self.window)
             self.streak.clear()

@@ -1,4 +1,4 @@
-/* Pure execution calculator plus optional browser controls. No order sending. */
+                                                                                 
 (function(root){
 function estimate(m, side, quantity, feeBps, sharesPerLot, offline=false){
  if(offline||!m||!m.fresh||!m.quote)throw Error('A fresh eligible quote is required.');

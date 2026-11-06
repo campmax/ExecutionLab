@@ -1,4 +1,4 @@
-"""Read-only live monitor: python monitor.py [--demo] [--no-browser]."""
+pass                                                                    
 import argparse
 from datetime import datetime, timezone
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
@@ -63,12 +63,12 @@ class Monitor:
                 h['last_request_ms']=(time.perf_counter()-started)*1000
                 accepted=state in ('monitoring','warming_up','recalibrating')
                 h['accepted' if accepted else 'rejected']+=1
-                # Duplicate books add no information to the recording.
+                                                                      
                 if state!='unchanged':self.write("snapshots", dict(s.public(), detector_status=state))
                 for alert in alerts:
                     self.write("alerts", alert)
         except Exception as exc:
-            # One unavailable symbol must not stop all monitoring.
+                                                                  
             with self.lock:
                 self.detectors[symbol].fail(f"{type(exc).__name__}: {exc}")
                 self.errors[symbol] += 1

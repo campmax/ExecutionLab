@@ -1,4 +1,4 @@
-"""Alpaca read-only quotes and authoritative market-clock gate. No order API."""
+pass                                                                            
 from datetime import datetime, timezone
 import json
 import math
@@ -24,7 +24,7 @@ def timestamp(value):
 
 
 def timestamp_token(value):
-    # Keep nanosecond differences for deduplication; datetime truncates to microseconds.
+                                                                                        
     dt = timestamp(value)
     match = re.search(r"T\d{2}:\d{2}:\d{2}(?:\.(\d{1,9}))?(?:Z|[+-]\d{2}:\d{2})$", value)
     if not match:
@@ -92,7 +92,7 @@ class Alpaca:
                 raise ValueError("Oversized response")
             return json.loads(body)
         except urllib.error.HTTPError as exc:
-            # Never propagate response bodies, request headers, or credentials.
+                                                                               
             meaning={401:"check API keys and account selection",403:"check feed entitlement and account selection",429:"rate limited; automatic retry"}.get(exc.code,"provider request failed")
             raise ValueError(f"Alpaca HTTP {exc.code}: {meaning}") from None
         except Exception:
@@ -108,7 +108,7 @@ class Alpaca:
         return parse_clock(self._get(f"https://{host}/v2/clock"),time.time())
 
     def quotes(self, symbols):
-        """One HTTP request per watchlist; isolate malformed individual quotes."""
+        pass                                                                      
         for symbol in symbols:validate_stock(symbol)
         query=urllib.parse.urlencode(dict(symbols=','.join(symbols),feed=self.feed))
         data=self._get('https://data.alpaca.markets/v2/stocks/quotes/latest?'+query)
