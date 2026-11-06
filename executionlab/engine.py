@@ -1,9 +1,5 @@
-pass                                                                  
 
-                                                                       
-                                                                             
-                                                                         
-   
+
 from dataclasses import dataclass, asdict
 import math
 
@@ -93,7 +89,7 @@ def simulate(events, policy, config=Config()):
         log(e, "fill", quantity=q, price=price, kind=kind)
 
     for i, e in enumerate(events):
-                                                                           
+
         if pending and e.t > pending["decision_t"] and e.t >= pending["ready"]:
             if pending["kind"] == "market":
                 depth = e.ask_size if sign == 1 else e.bid_size
@@ -109,8 +105,8 @@ def simulate(events, policy, config=Config()):
             else:
                 if not pending["active"]:
                     pending["active"] = True
-                                                                                 
-                                                                                   
+
+
                     crosses = (sign == 1 and pending["limit"] >= e.ask) or (sign == -1 and pending["limit"] <= e.bid)
                     if crosses:
                         log(e, "post_only_reject")
@@ -118,7 +114,7 @@ def simulate(events, policy, config=Config()):
                     else:
                         at_touch = abs(pending["limit"] - (e.bid if sign == 1 else e.ask)) < 1e-8
                         pending["queue"] = c.queue_multiplier * (e.bid_size if sign == 1 else e.ask_size)
-                                                                                             
+
                         log(e, "resting", limit=pending["limit"], queue=pending["queue"], at_touch=at_touch)
                 elif e.t >= pending["expiry"]:
                     log(e, "cancel", quantity=pending["quantity"])
@@ -142,7 +138,7 @@ def simulate(events, policy, config=Config()):
         if policy == "immediate":
             desired = remaining
         elif policy == "twap":
-                                                                                
+
             desired = max(0, c.quantity * (e.t - start) / (end - start) - filled)
         elif policy == "pov":
             desired = max(0, c.participation * seen_volume - filled)

@@ -25,7 +25,7 @@ class LiveTests(unittest.TestCase):
     def test_parse_real_api_shape(self):
         d=dict(sequence=10,time='2026-10-03T22:00:00.123Z',bids=[['60000','2',5]],asks=[['60001','3',7]])
         s=parse_book('BTC-USD',d,1791064800)
-        self.assertEqual(s.bid_size,2)                                                 
+        self.assertEqual(s.bid_size,2)
         self.assertEqual(s.ask_size,3)
 
     def test_invalid_auction_crossed_missing_time(self):

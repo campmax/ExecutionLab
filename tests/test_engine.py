@@ -111,7 +111,7 @@ class EngineTests(unittest.TestCase):
                 self.assertAlmostEqual(s["filled"], sum(f["quantity"] for f in r["fills"]))
                 self.assertAlmostEqual(s["shortfall"], s["execution_cost"]+s["fees"]+s["opportunity_cost"])
                 sign = 1 if side == "buy" else -1
-                                                                                 
+
                 paper = sign*c.quantity*(s["terminal"]-s["arrival"])
                 actual = s["cash_flow"]+s["inventory_change"]*s["terminal"]
                 self.assertAlmostEqual(paper-actual, s["shortfall"])

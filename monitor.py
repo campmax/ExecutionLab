@@ -1,4 +1,3 @@
-pass                                                                    
 import argparse
 from datetime import datetime, timezone
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
@@ -63,12 +62,12 @@ class Monitor:
                 h['last_request_ms']=(time.perf_counter()-started)*1000
                 accepted=state in ('monitoring','warming_up','recalibrating')
                 h['accepted' if accepted else 'rejected']+=1
-                                                                      
+
                 if state!='unchanged':self.write("snapshots", dict(s.public(), detector_status=state))
                 for alert in alerts:
                     self.write("alerts", alert)
         except Exception as exc:
-                                                                  
+
             with self.lock:
                 self.detectors[symbol].fail(f"{type(exc).__name__}: {exc}")
                 self.errors[symbol] += 1

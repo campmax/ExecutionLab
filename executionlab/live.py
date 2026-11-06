@@ -1,4 +1,3 @@
-pass                                                                           
 from collections import deque
 from dataclasses import dataclass, asdict
 from datetime import datetime, timezone
@@ -171,7 +170,7 @@ class Detector:
                 self.emitted[k] = now
         self.history.append(s)
         self.status = "monitoring" if len(self.history) > self.warmup else "warming_up"
-                                                                                   
+
         if max(self.streak.get("price_high", 0), self.streak.get("price_low", 0)) >= 10:
             self.history = deque(list(self.history)[-10:], maxlen=self.window)
             self.streak.clear()

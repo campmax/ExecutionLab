@@ -1,4 +1,3 @@
-pass                                                                            
 import argparse
 from dataclasses import replace
 import getpass
@@ -61,7 +60,7 @@ class StockMonitor(Monitor):
                     if session["is_open"] and session["session_id"]!=self.session_id:
                         self.session_id=session["session_id"]
                         self.session_start=session["timestamp"]
-                                                                                    
+
                         for symbol,d in list(self.detectors.items()):
                             fresh=self.new_detector(symbol)
                             fresh.alerts=d.alerts
@@ -70,7 +69,7 @@ class StockMonitor(Monitor):
                         self.write("session_transitions",dict(time=time.time(),session=self.session_id))
                 if not session["is_open"]:
                     self.pause("market_closed","Regular stock session closed; waiting for next open")
-                                                                            
+
                     self.clock_retry=time.monotonic()+30
                     return
             except Exception as exc:
@@ -105,7 +104,7 @@ class StockMonitor(Monitor):
         finally:self.batch=None
 
     def poll(self,symbol):
-                                                                             
+
         now=time.time()
         if not self.demo and (not self.session or self.session_error or not self.session["is_open"] or
                               now-self.session["timestamp"]>20 or now>=self.session["close_epoch"]):
@@ -128,7 +127,7 @@ class StockMonitor(Monitor):
         if s.exchange_time<self.session_start:
             raise ValueError("Waiting for a quote after this session's monitoring start")
         d=self.detectors[symbol]
-                                                                                    
+
         if d.last and abs(s.mid/d.last.mid-1)>=.2:
             with self.lock:
                 fresh=self.new_detector(symbol)

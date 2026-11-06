@@ -1,4 +1,3 @@
-pass                                                                        
 import html
 import json
 from pathlib import Path
@@ -41,7 +40,7 @@ svg+='<text x="65" y="275" fill="#aebdd1" font-size="13">Start</text><text x="82
 $('dataset').onchange=render;$('policy').onchange=render;
 $('download').onclick=()=>{const [ds,r]=selected(),keys=['t','decision_t','quantity','price','fee','kind','mid'],txt=[keys.join(','),...r.fills.map(f=>keys.map(k=>f[k]).join(','))].join('\n'),a=document.createElement('a'),u=URL.createObjectURL(new Blob([txt],{type:'text/csv'}));a.href=u;a.download='execution-fills.csv';a.click();setTimeout(()=>URL.revokeObjectURL(u),1000)};render();
 </script></html>'''
-                                                             
+
     payload = json.dumps(bundle, allow_nan=False).replace("<", "\\u003c")
     Path(path).parent.mkdir(parents=True, exist_ok=True)
     Path(path).write_text(template.replace("PAYLOAD", payload), encoding="utf-8")
